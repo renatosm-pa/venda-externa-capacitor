@@ -1,0 +1,113 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="login"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Lista de Filiais</ion-title>
+        <ion-buttons slot="end" secondary="right">
+            <ion-icon style="font-size: 23px;" name="close-circle" (click)="voltar()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <!-- <div class="card-1">
+        <div class="box-1">
+
+            <div class="icon-filial">
+                <ion-icon style="font-size: 2em;" name="storefront-outline"></ion-icon>
+            </div>
+
+            <div class="item1">
+                <p>Razão Social</p>
+            </div>
+
+            <div class="item2">
+                <p>Nome Fantasia</p>
+            </div>
+
+            <div class="item3">
+                <p><fa-icon icon="clipboard-list"></fa-icon>00000000000</p>
+            </div>
+
+            <div class="item4">
+                <p><fa-icon icon="clipboard-list"></fa-icon>000000000000000000</p>
+            </div>
+
+        </div>
+    </div> -->
+
+
+    <ion-card *ngFor="let filial of this.listafilial; index as i; let even = even"
+        (click)="detalharListaFilial(filial)">
+
+        <ion-card-header>
+            <ion-card-title >
+                <p style="font-size: 16px;">
+                    <ion-icon name="storefront-outline"></ion-icon> {{filial?.razaoSocial }}
+                </p>
+            </ion-card-title>
+
+            <ion-card-subtitle style="text-align:center;">{{filial?.nomeFantasia }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <p class="info-filial">
+                        <fa-icon icon="address-card"></fa-icon>
+                        {{filial?.cpfCnpj }}
+                    </p>
+                </ion-col>
+                <ion-col *ngIf="(filial.inscricaoEstadual)">
+                    <p class="info-filial">
+                        <fa-icon icon="clipboard-list"></fa-icon>
+                        {{filial?.inscricaoEstadual}}
+                        <!-- {{filial.endereco?.cidade != undefined || filial.endereco?.cidade != null ? filial.endereco?.cidade.xmun + '-' +filial.endereco.estado?.sigla: ''}} -->
+                    </p>
+                </ion-col>
+            </ion-row>
+
+
+
+            <!-- <ion-row>
+                <p>
+                    <fa-icon icon="home"></fa-icon>
+                    {{filial.endereco?.endereco +', Nº'+ filial.endereco?.numero +" - "+ filial.endereco?.complemento +" , "+ filial.endereco?.bairro}}
+                </p>
+            </ion-row> -->
+
+
+            <ion-row>
+                <ion-col *ngIf="(filial.endereco?.fone1)">
+                    <p>
+                        <fa-icon icon="phone-alt"></fa-icon>
+                        {{ filial.endereco?.fone1 }}
+                    </p>
+
+                </ion-col>
+
+                <ion-col *ngIf="(filial.endereco?.fone2)">
+                    <p>
+                        <fa-icon icon="phone-alt"></fa-icon>
+                        {{' '+ filial.endereco?.fone2 }}
+                    </p>
+
+                </ion-col>
+
+            </ion-row>
+
+
+
+
+
+
+        </ion-card-content>
+
+    </ion-card>
+
+
+</ion-content>

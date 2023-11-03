@@ -1,0 +1,197 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Lista de Pedidos</ion-title>
+        <ion-buttons slot="end" secondary="right">
+            <ion-icon style="font-size: 23px;" name="options-outline" (click)="abreFiltro()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-item>
+    <ion-input [(ngModel)]="nomeCliente" placeholder="Pesquisar Pedido" (keyup.enter)="buscaPedido()">
+    </ion-input>
+    <ion-button clear item-right (click)="buscaPedido()" style="height: 30px">
+        <ion-icon name="search"></ion-icon>
+    </ion-button>
+</ion-item>
+
+<ion-content>
+    <ion-list>
+        <ion-item-sliding *ngFor="let pedido of this.listaPedido ; index as i; let even = even">
+            <ion-item lines="none">
+                <ion-card [color]="even? 'light' : 'cinza'" (click)="this.detalharPedido(pedido, i)">
+
+                    <div class="content-itens">
+                        <div>
+                            <ion-icon name="document-text-outline"></ion-icon>{{pedido.id}}
+                        </div>
+
+                        <div>
+                            <ion-icon name="person-circle-outline"></ion-icon> {{pedido.cliente?.razaoSocial}}
+                        </div>
+
+                        <div *ngIf="pedido.cliente.nomeFantasia">
+                            <p>
+                                Fantasia:<span> {{ pedido.cliente?.nomeFantasia }} </span>
+                            </p>
+                        </div>
+
+                        <div class="flex-content">
+                            <p class="item-1">Emissao:<span> {{ DateFormatadaMostrar(pedido?.dataEmissao)}} </span></p>
+                            <p class="item-2">Situação:<span> {{mostraSituacao(pedido.situacao)}} </span></p>
+                        </div>
+
+                        <div class="flex-content">
+                            <p>Vl. Total:<span> {{ numberToReal(pedido.totalPedido) }}</span></p>
+                            <p *ngIf="(pedido.valorDesconto > 0)">Desconto: <span>
+                                    {{numberToReal(pedido.valorDesconto)+'('+pedido.percentualDesconto+'%)'
+                                    }}</span></p>
+                        </div>
+
+                        <div *ngIf="(pedido.valorDesconto > 0)">
+                            <p>Vl. Pagar: <span> {{numberToReal(pedido?.totalApagar) }} </span></p>
+                        </div>
+
+                        <div *ngIf="pedido.obsVenda">
+                            <p>Obs: <span> {{ pedido?.obsVenda }} </span></p>
+                        </div>
+                    </div>
+                  
+
+                </ion-card>
+            </ion-item>
+
+            <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="perguntaPedido(pedido, i)">
+                    <ion-icon name="close-circle-outline" style="position:absolute; top: 10px; font-size: 35px;">
+                    </ion-icon>
+                    <p style="margin: 0; padding-top: 40px; color: #ffffff;">Cancelar</p>
+                </ion-item-option>
+
+                <ion-item-option color="" (click)="this.detalharPedido(pedido, i)">
+                    <ion-icon name="menu" style="position:absolute; top: 10px; font-size: 35px;"></ion-icon>
+                    <p style="margin: 0; padding-top: 40px; color: #333333;">Detalhes</p>
+                </ion-item-option>
+
+                <ion-item-option color="tertiary" (click)="this.perguntaRelatorioPDF(pedido)">
+                    <ion-icon name="reader" style="position:absolute; top: 10px; font-size: 35px;"></ion-icon>
+                    <p style="margin: 0; padding-top: 40px; color: #ffffff;">Pedido PDF </p>
+                </ion-item-option>
+
+                <ion-item-option color="" (click)="this.imprimirCupom(pedido)">
+                    <ion-icon name="print-outline" style="position:absolute; top: 10px; font-size: 35px;"></ion-icon>
+                    <p style="margin: 0; padding-top: 40px; color: #ffffff;">Imprimir </p>
+                </ion-item-option>
+
+            </ion-item-options>
+
+        </ion-item-sliding>
+    </ion-list>
+
+
+
+    <!-- 
+    <ion-card [color]="even? 'light' : 'cinza'" (click)="perguntaPedido(pedido, i)"
+        *ngFor="let pedido of this.listaPedido ; index as i; let even = even">
+
+
+        <ion-card-header>
+
+            <ion-card-subtitle>
+                <ion-icon name="person-circle-outline"></ion-icon> {{pedido.cliente?.razaoSocial}}
+            </ion-card-subtitle>
+
+           
+
+        </ion-card-header>
+
+        <ion-grid>
+
+            <ion-row>
+                <ion-col *ngIf="pedido.cliente.nomeFantasia">
+                    <p>
+                        Fantasia:<span> {{ pedido.cliente?.nomeFantasia }} </span>
+                    </p>
+
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <p>
+                        Emissao:<span> {{ DateFormatadaMostrar(pedido?.dataEmissao)}} </span>
+                    </p>
+
+                </ion-col>
+
+                <ion-col>
+                    <p>
+                        Situação:<span> {{mostraSituacao(pedido.situacao)}} </span>
+                    </p>
+                </ion-col>
+
+
+            </ion-row>
+
+            <ion-row>
+
+
+                <ion-col>
+                    <p>
+                        Vl. Total:<span> {{ numberToReal(pedido.totalPedido) }}</span>
+                    </p>
+                </ion-col>
+
+
+                <ion-col *ngIf="(pedido.valorDesconto > 0)">
+                    <p>
+                        Desconto: <span> {{numberToReal(pedido.valorDesconto)+'('+pedido.percentualDesconto+'%)'
+                            }}
+                        </span>
+                    </p>
+                </ion-col>
+
+               
+
+            </ion-row>
+
+
+            <ion-row>
+                <ion-col *ngIf="(pedido.valorDesconto > 0)">
+                    <p>
+                        Vl. Pagar: <span> {{numberToReal(pedido.totalApagar) }} </span>
+                    </p>
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row *ngIf="pedido.obsVenda">
+                <ion-col>
+                    <p>
+                        Obs: <span> {{ pedido?.obsVenda }} </span>
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
+
+    </ion-card> -->
+
+
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados ...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add" (click)="novoPedido()"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>

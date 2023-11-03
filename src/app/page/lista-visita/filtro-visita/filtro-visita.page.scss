@@ -1,0 +1,77 @@
+.list {
+    background-color:#E2E2E2 !important;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+ion-thumbnail {
+    width: 70px;
+    height: 100px;
+}
+
+/* linhas pares (even) */
+.tabela tbody tr:nth-child(even) {
+    background-color: #CCC;
+}
+/* linhas ímpares (odd) */
+.tabela tbody tr:nth-child(odd) {
+    background-color: #FFF;
+}
+
+.iniciado {
+    --background: #FEB10F !important;
+}
+
+.atraso {
+    --background: #C63838 !important;
+}
+
+p {
+    margin: 0;
+    font-size: 15px;
+    color: #656566;
+}
+
+p span {
+    color: #494949;
+    font-weight: 500;
+}
+
+.nome-produto {
+    color: #494949;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+ion-col {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+ion-item {
+    --padding-start: 5px;
+    --padding-end: 0;
+    
+}
+
+.my-item {
+    margin-bottom: 10px;
+}
+
+hr {
+    border-bottom: 1px solid #efefef;
+    width: 90%;
+}
+
+.list-shadow {
+    border-radius: 3px;
+    margin-top: 3px;
+    padding: 0 5px 0 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    z-index: 9999; /* número máximo é 9999 */
+}

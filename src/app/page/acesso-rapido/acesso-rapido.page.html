@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title size="small" style="font-size:13px; text-align: left">
+      {{this.pedidoService.objConfiguracao.filial.razaoSocial}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <h2 style="text-align:center;">{{this.pedidoService.vendedorObj.nome}}</h2> -->
+  <!-- <ion-title>{{this.pedidoService.vendedorObj.nome}}</ion-title> -->
+  <!-- <h5 style="text-align:center;"> {{this.pedidoService.vendedorObj.nome}}</h5> -->
+
+  <div style="text-align:center;" class="mt-2">
+    <ion-label style="text-align:button">{{this.pedidoService.vendedorObj.nomeVendedor}}</ion-label>
+  </div>
+
+  <div class="grid-acesso mt-2">
+    <div class="item-acesso" (click)="irListaPedido()">
+      <img src="../../../assets/imagens/to-do-list.png" width="60">
+      <h5>Lista Pedidos</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irPedido()">
+      <img src="../../../assets/imagens/bag.png" width="60">
+      <h5>Novo Pedido</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irListaCliente()">
+      <img src="../../../assets/imagens/group2.png" width="60">
+      <h5>Lista Clientes</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irCadastroCliente()">
+      <img src="../../../assets/imagens/add-user2.png" width="60">
+      <h5>Novo Cliente</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irProduto()">
+      <img src="../../../assets/imagens/website.png" width="60">
+      <h5> Produtos</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irGraficoVendas()">
+      <img src="../../../assets/imagens/stats.png" width="60">
+      <h5> Gráfico</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irBuscaPreco()">
+      <img src="../../../assets/imagens/barcode.png" width="60">
+      <h5> Busca Preço</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irInventario()">
+      <img src="../../../assets/imagens/inventory.png" width="60">
+      <h5> Inventário</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irAgenda()">
+      <img src="../../../assets/imagens/calendar.png" width="60">
+      <h5> Agendar Visita</h5>
+    </div>
+
+    <div class="item-acesso" (click)="irConfiguracao()">
+      <img src="../../../assets/imagens/settings.png" width="60">
+      <h5> Configuração</h5>
+    </div>
+  </div>
+
+</ion-content>

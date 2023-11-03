@@ -1,0 +1,55 @@
+.body {
+    width: 100%;
+}
+
+hr {
+    border-bottom: 1px solid #efefef;
+    width: 90%;
+}
+
+ion-content {
+    background-color: #F5F6FA;
+}
+
+.iten-pedido {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.list-shadow {
+    border-radius: 3px;
+    margin-top: 3px;
+    padding: 0 5px 0 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    z-index: 9999; /* número máximo é 9999 */
+}
+
+.box {
+    border-color: #403E39;
+    border-width: thin;
+    border-style: solid;
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+
+.my-label {
+    font-size: 20px !important;
+}
+
+
+.formt-produto h3 {
+    color: #585858;
+    font-size: 16px;
+    margin-bottom: 0;
+    padding-left: 5px;
+}
+
+.formt-produto p {
+    margin: 0;
+}
+

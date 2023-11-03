@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="fechaFiltro()">
+      <ion-back-button defaultHref="lista-pedido"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Filtro de Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-item>
+
+  <ion-label class="my-label" position="stacked">Cliente</ion-label>
+  <!-- <div class="box"> style="margin-bottom: 8px;" -->
+  <ion-input type="search" clearInput [(ngModel)]="this.pedidoService.entradaConsulta.nomeCliente"
+    (keyup.enter)="carregarCliente()" placeholder="Pesquisar Cliente">
+  </ion-input>
+  <!-- </div> -->
+</ion-item>
+
+<ion-content>
+
+  <div>
+    <ion-list class="ion-margin-horizontal list-shadow" style="height: 400px; overflow-y: scroll; position: relative;"
+      [hidden]="sumirtela">
+      <ion-input *ngFor="let cliente of this.listaCliente" (click)="itemClienteSelecionado(cliente)"
+        style="border-bottom: 1px solid #efefef;">
+        {{cliente.razaoSocial}}
+      </ion-input>
+    </ion-list>
+  </div>
+
+
+  <ion-item>
+    <ion-label>Situação</ion-label>
+    <ion-select value="EM_ANALISE" okText="ok" cancelText="sair"
+      [(ngModel)]="this.pedidoService.entradaConsulta.situacao">
+      <ion-select-option value="EM_ANALISE">Em Análise</ion-select-option>
+      <ion-select-option value="EM_SEPARACAO">Em Separação</ion-select-option>
+      <ion-select-option value="SEPARADO">Em Aberto</ion-select-option>
+      <ion-select-option value="PREPARANDO_ENTREGA">Preparando para Entrega</ion-select-option>
+      <ion-select-option value="SAIU_ENTREGA">Saiu para Entrega</ion-select-option>
+      <ion-select-option value="FINALIZADO">Finalizado</ion-select-option>
+      <ion-select-option value="CANCELADO">Cancelado</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label class="my-label" position="stacked">Data da Emissão</ion-label>
+    <input type="date" [(ngModel)]="this.pedidoService.entradaConsulta.dataEmissao" dataBrasil>
+    <!--<ion-input expand="block" placeholder="" maxlength="9" [(ngModel)]="this.pedidoService.entradaConsulta.dataEmissao"
+      (click)="openCalendar()">
+    </ion-input> -->
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="my-label" position="stacked">Data da Entrega</ion-label>
+    <input type="date" [(ngModel)]="this.pedidoService.entradaConsulta.dataEntrega" dataBrasil>
+    <!-- <ion-input expand="block" placeholder="" maxlength="9" [(ngModel)]="this.pedidoService.entradaConsulta.dataEntrega"
+      (click)="openCalendarEntrega()">
+    </ion-input> -->
+  </ion-item>
+
+  <ion-item>
+
+  </ion-item>
+
+  <ion-button expand="full" shape="round" (click)="fechaFiltro()">
+    Pesquisar
+    <ion-icon name="search" slot="end"></ion-icon>
+  </ion-button>
+
+
+  <!-- {{this.pedidoService.entradaConsulta | json}} -->
+
+</ion-content>

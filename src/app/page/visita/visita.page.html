@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" secondary="left">
+      <ion-icon name="arrow-back-outline" (click)="irListaVisita()"></ion-icon>
+    </ion-buttons>
+    <ion-title>Agenda de Visita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-item>
+
+  <ion-label class="my-label" position="stacked">Cliente</ion-label>
+  <ion-input type="search" clearInput [(ngModel)]="this.nomeCliente" (keyup.enter)="carregarCliente()"
+    placeholder="Pesquisar Cliente">
+  </ion-input>
+
+</ion-item>
+
+<ion-content>
+  <div>
+    <div>
+      <!-- <ion-list class="ion-margin-horizontal list-shadow" style="max-height: 300px; overflow-y: scroll;"
+        [hidden]="sumirtela">
+        <ion-input *ngFor="let cliente of this.listaCliente" (click)="itemClienteSelecionado(cliente)"
+          style="border-bottom: 1px solid #efefef;">
+          {{cliente.razaoSocial}}
+        </ion-input>        
+      </ion-list> -->
+
+      <ion-list class="ion-margin-horizontal list-shadow" style="max-height: 300px; overflow-y: scroll;" *ngIf="sumirtela">
+        <ion-item *ngFor="let cliente of this.listaCliente" (click)="itemClienteSelecionado(cliente)"
+          style="border-bottom: 1px solid #efefef;">
+          {{cliente.razaoSocial}}
+        </ion-item>
+      </ion-list>
+
+
+    </div>
+
+
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label class="my-label" position="stacked">Proxima Visita</ion-label>
+                    
+          <input type="date" [(ngModel)]="dadosVisita.dataProximaVisita" dataBrasil>
+          <!-- <ion-input expand="block" placeholder="" maxlength="9" [(ngModel)]="dadosVisita.dataProximaVisita"
+            (click)="openCalendar()">
+          </ion-input> -->
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <div>
+      <ion-row size="12">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label class="my-label" position="floating">Observação</ion-label>
+            <ion-textarea [(ngModel)]="this.dadosVisita.obs"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <ion-button class="mt-3" (click)="gravarVisita()" expand="block">Check-In</ion-button>
+
+  </div>
+
+</ion-content>

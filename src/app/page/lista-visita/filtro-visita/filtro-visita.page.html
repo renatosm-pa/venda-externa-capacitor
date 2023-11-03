@@ -1,0 +1,124 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start" secondary="left">
+            <ion-icon name="arrow-back-outline" (click)="fechaFiltro()"></ion-icon>
+        </ion-buttons>
+        <ion-title>Filtro da Agenda</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-item>
+    <!-- {{this.nomeCliente}} -->
+    <ion-label class="my-label" position="stacked">Cliente</ion-label>
+    <ion-input type="search" clearInput [(ngModel)]="this.nomeCliente" (keyup.enter)="carregarCliente()"
+        placeholder="Pesquisar Cliente">
+    </ion-input>
+
+</ion-item>
+
+<ion-content>
+    
+    <div>
+        <ion-list class="ion-margin-horizontal list-shadow" style="max-height: 300px; overflow-y: scroll;"
+            [hidden]="sumirtela">
+            <ion-input *ngFor="let cliente of this.listaCliente" (click)="itemClienteSelecionado(cliente)"
+                style="border-bottom: 1px solid #efefef;">
+                {{cliente.razaoSocial}}
+            </ion-input>
+        </ion-list>
+    </div>
+
+
+        <ion-item>
+            <ion-label class="my-label" position="stacked">Data da Visita</ion-label>
+            <input type="date" [(ngModel)]="this.visitaService.entradaConsultaVisita.dataVisita" dataBrasil>
+            <!-- <ion-input expand="block" placeholder="" maxlength="9"
+                [(ngModel)]="this.visitaService.entradaConsultaVisita.dataVisita" (click)="openCalendarVisita()">
+            </ion-input> -->
+        </ion-item>
+
+        <ion-item>
+            <ion-label class="my-label" position="stacked">Data da Próxima</ion-label>
+            <input type="date" [(ngModel)]="this.visitaService.entradaConsultaVisita.dataProximaVisita" dataBrasil>
+            <!-- <ion-input expand="block" placeholder="" maxlength="9"
+                [(ngModel)]="this.visitaService.entradaConsultaVisita.dataProximaVisita"
+                (click)="openCalendarProximaVisita()">
+            </ion-input> -->
+        </ion-item>
+ 
+
+    <ion-button expand="full" shape="round" (click)="fechaFiltro()">
+        Pesquisar
+        <ion-icon name="search" slot="end"></ion-icon>
+    </ion-button>
+    <!-- {{pedidoService.entradaConsultaPrdoduto | json}}  -->
+</ion-content>
+
+
+
+
+
+
+
+
+
+<!-- <ion-header>
+    <ion-toolbar>
+        <ion-title>Filtro de Produtos</ion-title>
+        <ion-buttons slot="end" secondary="right">
+            <ion-icon style="font-size: 23px;" name="filter" (click)="abreFiltro()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+   
+    <ion-item>
+        <ion-label class="my-label" position="floating">Nome Produto</ion-label>
+        <ion-input (keyup.enter)="fechaFiltro()" id="quantidade"
+            [(ngModel)]="pedidoService.entradaConsultaPrdoduto.nomeProduto" clearInput>
+        </ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label class="my-label" position="floating">EAN</ion-label>
+        <ion-input (keyup.enter)="fechaFiltro()" id="quantidade" [(ngModel)]="pedidoService.entradaConsultaPrdoduto.ean"
+            clearInput>
+        </ion-input>
+    </ion-item>
+
+
+    <ion-item lines="none">
+        <ion-label class="my-label" position="stacked">Grupo</ion-label>
+        <ion-select [(ngModel)]="pedidoService.entradaConsultaPrdoduto.codGrupo" multiple="false"
+            interface="action-sheet">
+            <ion-select-option *ngFor="let grupo of this.listaGrup; let i=index" [(value)]="grupo.id">
+                {{grupo.nome}}
+            </ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+        <ion-label class="my-label" position="stacked">Fabricante</ion-label>
+        <ion-select [(ngModel)]="pedidoService.entradaConsultaPrdoduto.codFab" multiple="false"
+            interface="action-sheet">
+            <ion-select-option *ngFor="let fabricante of this.listaFabricante; let i=index" [(value)]="fabricante.id">
+                {{fabricante.nome}}
+            </ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+        <ion-label class="my-label" position="stacked">Plano de Pagamento</ion-label>
+        <ion-select  [(ngModel)]="pedidoService.plano_id" multiple="false"
+             interface="action-sheet">
+            <ion-select-option *ngFor="let plano of this.listaPlanoPagamento; let i=index" [(value)]="plano.id">
+                {{plano.nome}}
+            </ion-select-option>
+        </ion-select>
+    </ion-item>
+
+     {{pedidoService.entradaConsultaPrdoduto | json}} 
+    <ion-button expand="full" shape="round" (click)="fechaFiltro()">Pesquisar</ion-button>
+</ion-content> -->

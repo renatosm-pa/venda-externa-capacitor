@@ -1,0 +1,12 @@
+﻿jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore chaveAssinatura2021.jks app-release-unsigned.apk keyinter
+C:/Users/DEV-LUIZ/AppData/Local/Android/Sdk/build-tools/31.0.0/zipalign -v 4 app-release-unsigned.apk VendaExterna.apk
+C:/Users/DEV-LUIZ/AppData/Local/Android/Sdk/build-tools/31.0.0/apksigner.bat  sign --ks chaveAssinatura2021.jks  VendaExterna.apk
+C:/Users/DEV-LUIZ/AppData/Local/Android/Sdk/build-tools/31.0.0/apksigner.bat verify -v VendaExterna.apk
+
+
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore app-release-unsigned.apk alias_name
+/Users/adamsouza/Library/Android/sdk/build-tools/31.0.0/zipalign -v 4 app-release-unsigned.apk bilhetin.apk
+/Users/adamsouza/Library/Android/sdk/build-tools/31.0.0/apksigner sign --ks my-release-key.keystore  bilhetin.apk
+/Users/adamsouza/Library/Android/sdk/build-tools/31.0.0/apksigner verify -v bilhetin.apk

@@ -1,0 +1,108 @@
+<ion-content class="background ion-padding" *ngIf="this.existe_device?.caminho != undefined">
+
+  <div class="mt-3">
+    <ion-img style="width: 150px" src="./assets/imagens/icon.png"></ion-img>
+  </div>
+
+  <h1 class="ion-text-center">Venda Externa</h1>
+
+  <div class="body">
+
+    <div class="label-float input-container">
+      <input [(ngModel)]="credentials.login" placeholder=" " (keyup.enter)="login()" />
+      <label>Usuário</label>
+      <fa-icon icon="passwordToggleIconUser" class="icon"></fa-icon>
+
+    </div>
+
+    <div class="label-float input-container">
+      <input [(ngModel)]="credentials.password" (keyup.enter)="login()" [type]="showPassword ? 'text' : 'password'"
+        placeholder=" " />
+      <label>Senha</label>
+      <fa-icon [icon]="passwordToggleIcon" class="icon" (click)="togglePassword()"></fa-icon>
+    </div>
+
+    <ion-item lines="none">
+      <ion-toggle slot="end" mode="ios" [(ngModel)]="salva_senha"></ion-toggle>
+      <ion-label>Salva Login</ion-label>
+
+    </ion-item>
+
+    <ion-button style="margin-top: 20px;" expand="block" (click)="login()">
+      Entrar
+      <!--  <ion-icon name="lock-open-outline"></ion-icon>  -->
+    </ion-button>
+    <ion-button color="dark" style="margin-top: 20px;" expand="block" (click)="sairApk()">Sair</ion-button>
+
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark">
+      <ion-icon name="construct-outline" (click)="configuracao()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+<ion-content *ngIf="this.existe_device?.caminho == undefined">
+
+  <div style="padding: 5px" class="mt-1" tabindex="-1">
+    <ion-img style="width: 150px" src="./assets/imagens/icon.png"></ion-img>
+  </div>
+
+  <h3 class="ion-text-center" tabindex="-1">Bem Vindo!</h3>
+
+  <div style="padding: 5px;" tabindex="-1">
+    <ion-text tabindex="-1">
+      <p class="ion-text-center">Para seu primeiro Acesso registre seu dispositivo.</p>
+      <p class="ion-text-center">1. No Portal, entre na área de <u>Cadastro de Dispositivo</u><br>
+        <br>2. Informe o identificador.
+      </p>
+    </ion-text>
+  </div>
+
+  <p class="ion-text-center  mt-1">Identificador do Dispositivo</p>
+  <h1 class="ion-text-center">{{this.pedidoService.chaveDispositivo}}</h1>
+
+  <ion-item>
+    <ion-label position="floating">Domínio</ion-label>
+    <ion-input clearInput req id="dominio_servidor" [(ngModel)]="dominio_servidor" placeholder="">
+    </ion-input>
+  </ion-item>
+
+  <!--   
+  <ion-button id="botaoVerificar" class="btn-primary" expand="block" (click)="cadastraDominio()" tabindex="1">
+    Cadastrar Domínio
+  </ion-button> -->
+
+  <ion-item>
+    <ion-label position="floating">CNPJ</ion-label>
+    <!-- <ion-input clearInput req id="cnpj_conf" [(ngModel)]="cnpj" placeholder="" maxlength="18"
+      (ionChange)="cnpj = mascara(cnpj, '##.###.###/####-##')"> </ion-input>-->
+
+
+      <p-inputMask id="cnpj_conf" mask="999.999.999-99" placeholder="_._._-__" [(ngModel)]="cnpj" maxlength="18"/>
+      
+
+    
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Nome</ion-label>
+    <ion-input clearInput req id="nome" [(ngModel)]="nome" placeholder="" maxlength="150">
+    </ion-input>
+  </ion-item>
+
+  <ion-button id="botaoVerificar" class="btn-primary" expand="block" (click)="cadastraDispositivo()" tabindex="1">
+    Cadastrar Dispositivo
+  </ion-button>
+  <!-- 
+  <ion-button id="botaoVerificar" class="btn-primary" expand="block" (click)="VerificarVersao()" tabindex="1">
+    Verificar
+  </ion-button> -->
+
+  <p class="ion-text-center  mt-1">Versão {{this.versionCode}}</p>
+
+
+
+</ion-content>

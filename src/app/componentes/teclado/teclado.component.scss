@@ -1,0 +1,26 @@
+ion-row {
+  margin-bottom: -15px;
+}
+
+ion-button {
+  margin: 5px;
+  --background: #3f9acf;
+  --box-shadow: 10px 5px 14px -15px grey;
+  --background-activated: #63a8cf;
+  --background-hover: #63a8cf;
+  --color: #ffffff !important;
+}
+
+
+// .btn {
+//   margin: 5px;
+//   background: rgba(255, 255, 255, 0.432);
+//   box-shadow: 10px 5px 14px -15px grey;
+//   --background-activated: rgba(255, 255, 255, 0.63);
+//   --background-hover: rgba(255, 255, 255, 0.63);
+//   color: #333333 !important;
+//   border-radius: 4px;
+//   height: 35px;
+//   width: 86px;
+//   vertical-align: middle;
+// }

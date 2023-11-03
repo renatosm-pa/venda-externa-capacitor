@@ -1,0 +1,7 @@
+{
+  "name": "venda-externa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

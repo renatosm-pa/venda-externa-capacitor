@@ -1,0 +1,107 @@
+ion-content {
+    --background: #F9FAFB;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+ion-col {
+    padding: 0 !important;
+}
+
+p {
+    margin: 0;
+    font-size: 12px;
+}
+
+span {
+    color: #E8AB2E;
+    font-weight: 200;
+}
+
+ion-card {
+    width: 100%;
+    margin-left: unset;
+    margin-right: unset;
+    margin-inline: -5px;
+    margin: 4px;
+    -webkit-box-shadow: 0px 2px 9px -7px rgb(0 0 0 / 50%); 
+    box-shadow: 0px 2px 9px -7px rgb(0 0 0 / 50%);   
+}
+
+ion-card-header {
+    padding-inline-start: 5px !important;
+    padding-inline-end: 5px !important;
+    padding-top: 10px !important;
+    padding-bottom: 5px !important;
+}
+
+.list {
+    background-color:#E2E2E2 !important;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+.iniciado {
+    --background: #FEB10F !important;
+}
+
+.atraso {
+    --background: #C63838 !important;
+}
+
+.card-content-md { 
+    padding-bottom: 0px;
+}
+
+.content-itens {
+    padding: 10px;
+    // display: flex;
+    // flex-wrap: wrap;
+}
+
+.flex-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-item-options {
+    height: 88%;
+    position: absolute;
+    top: 10px;
+}
+
+ion-item-sliding {
+    display: block;
+    position: relative;
+    width: 107%;
+    margin-left: -15px;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.card-1 {
+    border-radius: 8px;
+    margin: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.box-1 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap
+}
+
+.icon-filial {
+    
+}
+
+.itens {
+    
+}
+
+.info-filial{
+    color: var(--ion-color-primary);
+}

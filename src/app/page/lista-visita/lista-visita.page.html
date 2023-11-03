@@ -1,0 +1,128 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Agenda de Visita</ion-title>
+        <ion-buttons slot="end" secondary="right">
+            <ion-icon style="font-size: 23px;" name="options-outline" (click)="abreFiltro()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-item>
+        <ion-input [(ngModel)]="this.nomeCliente" placeholder="Pesquisar Cliente" (keyup.enter)="buscaVisita()">
+        </ion-input>
+        <ion-button clear item-right (click)="consultar()" style="height: 30px">
+            Pesquisar
+            <ion-icon name="search" slot="end"></ion-icon>
+        </ion-button>
+    </ion-item>
+
+    <!-- {{this.listaVisita | json }} -->
+    <ion-card *ngFor="let visita of this.listaVisita" (click)="perguntaVisita(visita)">
+
+        <ion-card-header>
+            <ion-card-title>
+                <ion-icon name="person-circle-outline"></ion-icon> {{visita.cliente?.razaoSocial }}
+            </ion-card-title>
+
+            <ion-card-subtitle style="text-align: center">{{visita.cliente?.nomeFantasia }}</ion-card-subtitle>
+
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <p>
+                        <fa-icon icon="id-card"></fa-icon>
+                        {{visita.cliente?.cpfCnpj }}
+                    </p>
+                </ion-col>
+                <ion-col>
+                    <p>
+                        <fa-icon icon="map-pin"></fa-icon>
+                        {{visita.cliente.endereco?.cidade != undefined || visita.cliente.endereco?.cidade != null ? visita.cliente.endereco?.cidade.xmun + '-' +visita.cliente.endereco?.estado.sigla: ''}}
+                    </p>
+                </ion-col>
+            </ion-row>
+
+            <!-- 
+            <ion-row>
+                <p>
+                    <fa-icon icon="home"></fa-icon>
+                    {{visita.cliente.endereco?.endereco +', Nº'+ visita.cliente.endereco?.numero +" - "+ visita.cliente.endereco?.complemento +" , "+ visita.cliente.endereco?.bairro}}
+                </p>
+            </ion-row> 
+            -->
+
+
+            <ion-row>
+                <ion-col *ngIf="(visita.cliente.endereco?.fone1)">
+                    <p>
+                        <fa-icon icon="phone-alt"></fa-icon>
+                        {{ visita.cliente.endereco?.fone1  }}
+                    </p>
+                    <!-- <a href="tel:+983135776">{{ cliente.endereco?.fone1  }}</a> -->
+                </ion-col>
+
+                <ion-col *ngIf="(visita.cliente.endereco?.fone2)">
+                    <p>
+                        <fa-icon icon="phone-alt"></fa-icon>
+                        {{'    '+ visita.cliente.endereco?.fone2  }}
+                    </p>
+
+                </ion-col>
+
+            </ion-row>
+
+
+
+
+            <ion-row>
+                <ion-col>
+                    <p>
+                        <fa-icon icon="calendar"></fa-icon>
+                        <span> Visita: </span> {{ (DateFormatadaMostrar(visita.dataVisita))  }}
+                    </p>
+
+                </ion-col>
+
+                <ion-col *ngIf="(visita.dataProximaVisita)">
+                    <p>
+                        <fa-icon icon="calendar"></fa-icon>
+                        <span>Próxima:</span>{{ DateFormatadaMostrar(visita?.dataProximaVisita)  }}
+                    </p>
+
+                </ion-col>
+
+            </ion-row>
+
+
+            <ion-row>
+                <ion-col *ngIf="(visita.obs)">
+                    <p>
+                        <fa-icon icon="reader"></fa-icon>
+                        <span>OBS:</span>{{ visita?.obs  }}
+                    </p>
+                </ion-col>
+            </ion-row>
+
+        </ion-card-content>
+
+    </ion-card>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados ...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add" (click)="cadastroVisita()"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>

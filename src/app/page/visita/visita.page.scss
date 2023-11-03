@@ -1,0 +1,138 @@
+.body {
+    width: 100%;
+}
+
+hr {
+    border-bottom: 1px solid #efefef;
+    width: 90%;
+}
+
+ion-content {
+    background-color: #F5F6FA;
+}
+
+ion-card {
+    width: 100% !important;
+}
+
+.my-item {
+    padding-top: 0;
+    padding-bottom:0;
+    --padding-end: 0;
+    --padding-start: 0;
+    min-height:0;
+}
+
+.item-pedido {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.list-shadow {
+    border-radius: 3px;
+    margin-top: 3px;
+    padding: 0 5px 0 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    z-index: 9999; /* número máximo é 9999 */
+}
+
+.box {
+    border-color: #403E39;
+    border-width: thin;
+    border-style: solid;
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+// ion-input {
+//     border: 1px solid #333333;
+//     border-radius: 4px;
+//     margin-top: 0.5em;
+//     --padding-start: 10px !important;
+// }
+
+// ion-select {
+//     border: 1px solid #333333;
+//     border-radius: 4px;
+//     margin-top: 0.5em;
+// }
+
+.my-label {
+    font-size: 20px !important;
+}
+
+// .cliente {
+//     border-radius: 50px;
+//     background: #ffffff;
+//     box-shadow:  20px 20px 60px #d9d9d9, 
+//              -20px -20px 60px #ffffff;
+//     float: left;
+// }
+
+// .plano-pagamento {
+//     border-radius: 50px;
+//     background: #ffffff;
+//     box-shadow:  20px 20px 60px #d9d9d9, 
+//              -20px -20px 60px #ffffff;
+//     float: right;
+// }
+
+.formt-produto {
+    padding: 5px;
+}
+
+.formt-produto h3 {
+    color: #585858;
+    font-size: 14px;
+    margin-bottom: 0;
+    padding-left: 5px;
+    margin-top: 2px;
+    // line-height: 0.5 !important;
+
+    // margin-left: unset;
+    // margin-right: unset;
+    // margin-inline: -5px;
+    // margin: 4px;
+}
+
+.formt-produto p {
+    margin: 0;
+    font-size: 13px;
+}
+
+ion-item-options {
+    height: 80%;
+    position: absolute;
+    top: 13px;
+}
+
+.flex-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+ion-item-sliding {
+    display: block;
+    position: relative;
+    width: 105%;
+    // margin-left: -21px;
+    margin-top: -9px;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.content-itens {
+    margin: 6px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    padding: 5px;
+}

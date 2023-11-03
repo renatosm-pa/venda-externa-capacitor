@@ -1,0 +1,166 @@
+<div style="text-align: center;">
+    <ion-grid style="width: 300px;" *ngIf="!inline">
+
+        <ion-row>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(1)">1</ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(2)">2</ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(3)">3</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(4)">4</ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(5)">5</ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(6)">6</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(7)">7</ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(8)">8</ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(9)">9</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoLimpar()">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoNumero(0)">0</ion-button>
+            </ion-col>
+
+            <ion-col size="4">
+                <ion-button style="width: 100%;" (click)="acaoapagar()">
+                    <ion-icon name="arrow-round-back"></ion-icon>
+                </ion-button>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+
+
+    <ion-grid *ngIf="inline">
+
+        <ion-row>
+
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(0)">0</ion-button>
+            </ion-col>
+
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(1)">1</ion-button>
+            </ion-col>
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(2)">2</ion-button>
+            </ion-col>
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(3)">3</ion-button>
+            </ion-col>
+
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(4)">4</ion-button>
+            </ion-col>
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(5)">5</ion-button>
+            </ion-col>
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(6)">6</ion-button>
+            </ion-col>
+
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(7)">7</ion-button>
+            </ion-col>
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(8)">8</ion-button>
+            </ion-col>
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoNumero(9)">9</ion-button>
+            </ion-col>
+
+            <ion-col size="1">
+                <ion-button style="width: 100%;" (click)="acaoLimpar()">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+            </ion-col>
+
+
+            <ion-col  size="1">
+                <ion-button style="width: 100%;" (click)="acaoapagar()">
+                    <ion-icon name="arrow-round-back"></ion-icon>
+                </ion-button>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+
+</div>
+
+<!-- <div>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(1)">1</ion-button>
+            </ion-col>
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(2)">2</ion-button>
+            </ion-col>
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(3)">3</ion-button>
+            </ion-col>
+
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(4)">4</ion-button>
+            </ion-col>
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(5)">5</ion-button>
+            </ion-col>
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(6)">6</ion-button>
+            </ion-col>
+
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(7)">7</ion-button>
+            </ion-col>
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(8)">8</ion-button>
+            </ion-col>
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(9)">9</ion-button>
+            </ion-col>
+
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoLimpar()">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+            </ion-col>
+
+            <ion-col size="1.5">
+                <ion-button color="light" (click)="acaoNumero(0)">0</ion-button>
+            </ion-col>
+
+            <ion-col size="1.5">
+                <ion-button color="light">
+                    <ion-icon name="arrow-round-back"></ion-icon>
+                </ion-button>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+
+</div> -->

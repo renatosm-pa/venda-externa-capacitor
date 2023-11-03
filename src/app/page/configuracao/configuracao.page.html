@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-back-button (click)="avancar()" ></ion-back-button>
+    </ion-buttons> -->
+
+    <ion-buttons slot="start" secondary="left">
+      <ion-icon name="arrow-back-outline" (click)="avancar()"></ion-icon>
+    </ion-buttons>
+
+    <ion-title>Configuração</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="body">
+
+    <ion-item>
+      <ion-label class="my-label" position="floating">Caminho do Servidor</ion-label>
+      <ion-input readonly (ionBlur)="GravaConfiguracao()" clearInput expand="block" id="ip"
+        [(ngModel)]="objConfiguracao.ip" placeholder="" (keyup.enter)="GravaConfiguracao()">
+      </ion-input>
+    </ion-item>
+
+  
+
+    <!-- {{filial_id | json}} -->
+    <!-- <ion-item *ngIf="this.listaFilial != ''" class="mt-3">
+      <ion-label style="font-size:20px" position="stacked">Filial</ion-label>
+      <ion-select readonly (ionChange)="GravaConfiguracao()" [(ngModel)]="filial_id" (ionChange)="carregarFilial()"
+        multiple="false" interface="action-sheet">
+        <ion-select-option readonly *ngFor="let filial of this.listaFilial" [value]="filial.id">
+          {{filial.razaoSocial}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-label>{{lblEstoque}}</ion-label>
+      <ion-toggle [checked]="this.objConfiguracao.estoque" (ionChange)="acaoEscolherEstoqueProdutoPesquisa($event)"
+        (click)="$event.stopPropagation()" mode="ios"></ion-toggle>
+    </ion-item>
+
+    <!-- <ion-item *ngIf="this.listaFilial != ''">
+      <ion-label>Cor do Aplicativo</ion-label>
+      <ion-select readonly position="stacked" value="tema-larenja" okText="ok" cancelText="sair"
+        (ionChange)="GravaConfiguracao()" [(ngModel)]="this.objConfiguracao.cor">
+     
+        <ion-select-option value="tema-laranja">Laranja</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+    <ion-item lines="none">
+      <ion-label >Modo Escuro</ion-label>
+      <ion-toggle slot="end" mode="ios" [checked]="toggle_theme" (ionChange)="changeTheme($event)"></ion-toggle>
+    </ion-item>
+
+    <!-- <ion-item class="mt-3">
+      <ion-label style="font-size:20px" position="stacked">{{this.pedidoService.chaveDispositivo}}</ion-label>
+    </ion-item> -->
+
+
+    <ion-col size-md="6" size-sm="12">
+      <ion-item>
+        <ion-label class="my-label">Impressora</ion-label>
+        <ion-select interface="alert" multiple="false" [(ngModel)]="objConfiguracao.macImpressora"
+          placeholder="Selecione" tabindex="1" (ionChange)="GravaConfiguracao()">
+          <ion-select-option *ngFor="let imp of impressoras" [value]="imp.address">{{imp.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size-md="6" size-sm="12">
+      <ion-item>
+        <ion-label class="my-label">Tamanho Papel</ion-label>
+        <ion-select multiple="false" [(ngModel)]="objConfiguracao.colunasImpressao" placeholder="Selecione" tabindex="2"
+          (ionChange)="GravaConfiguracao()">
+          <ion-select-option [value]="45">80 mm</ion-select-option>
+          <ion-select-option [value]="32">58 mm</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+
+
+    <ion-button class="mt-3" (click)="avancar()" expand="block">Sair</ion-button>
+
+  </div>
+
+</ion-content>
