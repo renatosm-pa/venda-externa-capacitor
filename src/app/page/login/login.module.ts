@@ -1,4 +1,4 @@
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+
 import { LoginPage } from "./login.page";
 import { LoginPageRoutingModule } from "./login-routing.module";
 import { IonicModule } from "@ionic/angular";
@@ -12,8 +12,7 @@ import { NgModule } from "@angular/core";
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
-    FontAwesomeModule
+    LoginPageRoutingModule
   ],
   declarations: [LoginPage]
 })

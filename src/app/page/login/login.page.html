@@ -12,20 +12,18 @@
       <input [(ngModel)]="credentials.login" placeholder=" " (keyup.enter)="login()" />
       <label>Usuário</label>
       <fa-icon icon="passwordToggleIconUser" class="icon"></fa-icon>
-
     </div>
 
     <div class="label-float input-container">
       <input [(ngModel)]="credentials.password" (keyup.enter)="login()" [type]="showPassword ? 'text' : 'password'"
         placeholder=" " />
       <label>Senha</label>
-      <fa-icon [icon]="passwordToggleIcon" class="icon" (click)="togglePassword()"></fa-icon>
+      <ion-icon [icon]="passwordToggleIcon" class="icon" (click)="togglePassword()"></ion-icon>
     </div>
 
     <ion-item lines="none">
       <ion-toggle slot="end" mode="ios" [(ngModel)]="salva_senha"></ion-toggle>
       <ion-label>Salva Login</ion-label>
-
     </ion-item>
 
     <ion-button style="margin-top: 20px;" expand="block" (click)="login()">

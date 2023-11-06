@@ -22,7 +22,6 @@ import { Geolocation, GeolocationOptions, GeolocationPosition } from '@capacitor
 
 
 
-
 @Component({
   selector: 'app-visita',
   templateUrl: './visita.page.html',
@@ -281,7 +280,7 @@ export class VisitaPage extends PagePadrao implements OnInit {
   async gravarVisita() {
 
     this.getLocation();
-
+    this.checkGpsStatus();
 /*  if (this.acaoVisita == 'I') {
       await this.getGeolocalizacao();
     }
