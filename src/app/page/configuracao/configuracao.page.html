@@ -28,7 +28,7 @@
     <!-- {{filial_id | json}} -->
     <!-- <ion-item *ngIf="this.listaFilial != ''" class="mt-3">
       <ion-label style="font-size:20px" position="stacked">Filial</ion-label>
-      <ion-select readonly (ionChange)="GravaConfiguracao()" [(ngModel)]="filial_id" (ionChange)="carregarFilial()"
+      <ion-select readonly (ngModelChange)="GravaConfiguracao()" [(ngModel)]="filial_id" (ngModelChange)="carregarFilial()"
         multiple="false" interface="action-sheet">
         <ion-select-option readonly *ngFor="let filial of this.listaFilial" [value]="filial.id">
           {{filial.razaoSocial}}
@@ -38,7 +38,7 @@
 
     <ion-item>
       <ion-label>{{lblEstoque}}</ion-label>
-      <ion-toggle [checked]="this.objConfiguracao.estoque" (ionChange)="acaoEscolherEstoqueProdutoPesquisa($event)"
+      <ion-toggle [checked]="this.objConfiguracao.estoque" (ngModelChange)="acaoEscolherEstoqueProdutoPesquisa($event)"
         (click)="$event.stopPropagation()" mode="ios"></ion-toggle>
     </ion-item>
 
@@ -65,7 +65,7 @@
       <ion-item>
         <ion-label class="my-label">Impressora</ion-label>
         <ion-select interface="alert" multiple="false" [(ngModel)]="objConfiguracao.macImpressora"
-          placeholder="Selecione" tabindex="1" (ionChange)="GravaConfiguracao()">
+          placeholder="Selecione" tabindex="1" (ngModelChange)="GravaConfiguracao()">
           <ion-select-option *ngFor="let imp of impressoras" [value]="imp.address">{{imp.name }}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -75,7 +75,7 @@
       <ion-item>
         <ion-label class="my-label">Tamanho Papel</ion-label>
         <ion-select multiple="false" [(ngModel)]="objConfiguracao.colunasImpressao" placeholder="Selecione" tabindex="2"
-          (ionChange)="GravaConfiguracao()">
+          (ngModelChange)="GravaConfiguracao()">
           <ion-select-option [value]="45">80 mm</ion-select-option>
           <ion-select-option [value]="32">58 mm</ion-select-option>
         </ion-select>

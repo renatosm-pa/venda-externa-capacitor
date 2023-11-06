@@ -4,10 +4,10 @@ import { RouteReuseStrategy } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import {CommonModule, DatePipe, DecimalPipe, registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 //*import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
@@ -16,7 +16,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import {ButtonModule} from 'primeng/button';
 import { IonicModule, IonicRouteStrategy, IonIcon } from '@ionic/angular';
 import { ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-//import { BrMaskerModule } from 'br-mask';
+
+
 
 registerLocaleData(localePt);
 @NgModule({
@@ -25,7 +26,7 @@ registerLocaleData(localePt);
       IonicModule.forRoot(),
       AppRoutingModule,
       HttpClientModule,
-      FontAwesomeModule,
+     //FontAwesomeModule,
      // BrMaskerModule,  
       //FiltroComponentPageModule, 
       ButtonModule, 

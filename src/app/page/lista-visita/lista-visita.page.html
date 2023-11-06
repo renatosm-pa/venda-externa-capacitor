@@ -25,9 +25,9 @@
     <ion-card *ngFor="let visita of this.listaVisita" (click)="perguntaVisita(visita)">
 
         <ion-card-header>
-            <ion-card-title>
+            <!-- <ion-card-title>
                 <ion-icon name="person-circle-outline"></ion-icon> {{visita.cliente?.razaoSocial }}
-            </ion-card-title>
+            </ion-card-title> -->
 
             <ion-card-subtitle style="text-align: center">{{visita.cliente?.nomeFantasia }}</ion-card-subtitle>
 
@@ -37,13 +37,13 @@
             <ion-row>
                 <ion-col>
                     <p>
-                        <fa-icon icon="id-card"></fa-icon>
+                        <!-- <fa-icon icon="id-card"></fa-icon> -->
                         {{visita.cliente?.cpfCnpj }}
                     </p>
                 </ion-col>
                 <ion-col>
                     <p>
-                        <fa-icon icon="map-pin"></fa-icon>
+                        <!-- <fa-icon icon="map-pin"></fa-icon> -->
                         {{visita.cliente.endereco?.cidade != undefined || visita.cliente.endereco?.cidade != null ? visita.cliente.endereco?.cidade.xmun + '-' +visita.cliente.endereco?.estado.sigla: ''}}
                     </p>
                 </ion-col>
@@ -62,7 +62,7 @@
             <ion-row>
                 <ion-col *ngIf="(visita.cliente.endereco?.fone1)">
                     <p>
-                        <fa-icon icon="phone-alt"></fa-icon>
+                        <!-- <fa-icon icon="phone-alt"></fa-icon> -->
                         {{ visita.cliente.endereco?.fone1  }}
                     </p>
                     <!-- <a href="tel:+983135776">{{ cliente.endereco?.fone1  }}</a> -->
@@ -70,7 +70,7 @@
 
                 <ion-col *ngIf="(visita.cliente.endereco?.fone2)">
                     <p>
-                        <fa-icon icon="phone-alt"></fa-icon>
+                        <!-- <fa-icon icon="phone-alt"></fa-icon> -->
                         {{'    '+ visita.cliente.endereco?.fone2  }}
                     </p>
 
@@ -84,7 +84,7 @@
             <ion-row>
                 <ion-col>
                     <p>
-                        <fa-icon icon="calendar"></fa-icon>
+                        <!-- <fa-icon icon="calendar"></fa-icon> -->
                         <span> Visita: </span> {{ (DateFormatadaMostrar(visita.dataVisita))  }}
                     </p>
 
@@ -92,7 +92,7 @@
 
                 <ion-col *ngIf="(visita.dataProximaVisita)">
                     <p>
-                        <fa-icon icon="calendar"></fa-icon>
+                        <!-- <fa-icon icon="calendar"></fa-icon> -->
                         <span>Próxima:</span>{{ DateFormatadaMostrar(visita?.dataProximaVisita)  }}
                     </p>
 
@@ -104,7 +104,7 @@
             <ion-row>
                 <ion-col *ngIf="(visita.obs)">
                     <p>
-                        <fa-icon icon="reader"></fa-icon>
+                        <!-- <fa-icon icon="reader"></fa-icon> -->
                         <span>OBS:</span>{{ visita?.obs  }}
                     </p>
                 </ion-col>

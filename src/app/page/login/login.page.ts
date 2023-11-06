@@ -238,16 +238,13 @@ export class LoginPage extends PagePadrao implements OnInit {
     }
 
     mascara(t, mask) {
-        //alert(t.length)
-
-
         var i = t.length;
         var saida = mask.substring(1, 0);
         var texto = mask.substring(i)
         if (texto.substring(0, 1) != saida) {
             t += texto.substring(0, 1);
         }
-
+       
         return t
     }
 
