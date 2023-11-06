@@ -1345,7 +1345,7 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@capacitor/android@5.5.0":
+"@capacitor/android@^5.5.0":
   version "5.5.0"
   resolved "https://registry.npmjs.org/@capacitor/android/-/android-5.5.0.tgz"
   integrity sha512-ipJijb3M0FA6DvotS9zrbJ8p/mTEVg9EVtBmvUexogm8g5se1mc7i1gvOr3MQ/iTZ3PnNrRC/P7kHxa2R55iqg==
@@ -1471,10 +1471,31 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@ionic-native/android-permissions@^5.36.0":
+  version "5.36.0"
+  resolved "https://registry.npmjs.org/@ionic-native/android-permissions/-/android-permissions-5.36.0.tgz"
+  integrity sha512-kwjDKOhQs9KPo47LxQbkmLJ30coZzeJewA2u7I8DFae2kyD3usvGAgjWoY+x4xPsaA1NZ3IZNklaQOH/csIW7w==
+  dependencies:
+    "@types/cordova" latest
+
 "@ionic-native/call-number@^5.36.0":
   version "5.36.0"
   resolved "https://registry.npmjs.org/@ionic-native/call-number/-/call-number-5.36.0.tgz"
   integrity sha512-SFO76ebbwBEeqvgujWwqUTuFOx+qRxN7gGfXCid29ZE81TyRkNLeDUloRbTpfJs3NKSpHBonz1h73JEJTCRCfg==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/core@^5.36.0":
+  version "5.36.0"
+  resolved "https://registry.npmjs.org/@ionic-native/core/-/core-5.36.0.tgz"
+  integrity sha512-lOrkktadlKYbYf1LrDyAtsu1JnQ0oCCdkOU7iHQ8oXnNOkMwobFfD2m62F1CoOr0u9LIkpYnZSPjng8lZbmbNw==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/location-accuracy@^5.36.0":
+  version "5.36.0"
+  resolved "https://registry.npmjs.org/@ionic-native/location-accuracy/-/location-accuracy-5.36.0.tgz"
+  integrity sha512-DnUsU7bxiD6TafzxX+ZQNPosjUO4JibZucUB0tvzFDmhm6osTI85svEMSukpUQgvjW+Kp636AzXlzaV7C7KHJw==
   dependencies:
     "@types/cordova" latest
 
@@ -3274,6 +3295,16 @@ copy-webpack-plugin@11.0.0:
     normalize-path "^3.0.0"
     schema-utils "^4.0.0"
     serialize-javascript "^6.0.0"
+
+cordova-plugin-android-permissions@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.npmjs.org/cordova-plugin-android-permissions/-/cordova-plugin-android-permissions-1.1.5.tgz"
+  integrity sha512-oTTV9cCMBqXTCmU+nYRebsP2IQfrtdvl2vYXHjoJgv5NHCIDgY4KFg6kJTcwXQOiymeGXuw0+MTvJJOueAdleA==
+
+cordova-plugin-request-location-accuracy@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/cordova-plugin-request-location-accuracy/-/cordova-plugin-request-location-accuracy-2.3.0.tgz"
+  integrity sha512-Rgr3DnRC8PUQyxmsOs76KxvDJB28MoCoYFfceiGn9Nzwsg6nAJmAwEtrYzm283x1cDhBPvzkZ6lzuldTkmnWjA==
 
 core-js-compat@^3.31.0, core-js-compat@^3.33.1:
   version "3.33.2"

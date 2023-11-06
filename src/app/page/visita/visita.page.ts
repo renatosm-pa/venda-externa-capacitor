@@ -18,6 +18,9 @@ import { StringUtils } from 'src/app/utils/string-utils';
 //import { CalendarModal, CalendarModalOptions, CalendarModule } from 'ion2-calendar';
 import { Keyboard } from '@capacitor/keyboard';
 import { Geolocation, GeolocationOptions, GeolocationPosition } from '@capacitor/geolocation';
+import { CallbackID, Capacitor } from '@capacitor/core';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 
 
@@ -36,6 +39,11 @@ export class VisitaPage extends PagePadrao implements OnInit {
   filial_id: any = { id: 1 };
   public idVendedor: any;
   acaoVisita: any;
+
+  coordinate: any;
+  watchCoordinate: any;
+  watchId: any;
+
   constructor(public menuCtrl: MenuController,
     private router: Router,
     private http: HttpUtilService,
@@ -50,8 +58,9 @@ export class VisitaPage extends PagePadrao implements OnInit {
     public modalController: ModalController,
     public platform: Platform,
     public modalCtrl: ModalController,
-     
-
+    private zone: NgZone,
+    public androidPermissions: AndroidPermissions,
+    public locationAccuracy: LocationAccuracy
   ) {
     super(alertController);
     this.menuCtrl.enable(true);
@@ -59,65 +68,23 @@ export class VisitaPage extends PagePadrao implements OnInit {
 
 
 
-
-
-  async getLocation() {
+  watchPosition() {
     try {
-      const coordinates = await Geolocation.getCurrentPosition();
-      // Trate os dados de localização aqui
-      this.getGPSLocation();
-    } catch (error) {
-      if (error.code === 1) {
-        console.error('Serviços de localização desativados. Ative o GPS.');
-        alert("Serviços de localização desativados. Ative o GPS.");
-      
-      } else {
-        console.error('Erro ao acessar a localização:', error);
-        
-      }
+      this.watchId = Geolocation.watchPosition({}, (position, err) => {
+        console.log('Watch', position);
+        this.zone.run(() => {
+          this.watchCoordinate = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
+
+          console.log('latitude: ', this.watchCoordinate.latitude);
+          console.log('latitude: ', this.watchCoordinate.longitude);
+        });
+      });
+    } catch (e) {
+      console.error(e);
     }
-  }
-
-
-
-  async getGPSLocation() {
-    const coordinates = await Geolocation.getCurrentPosition();
-    const latitude = coordinates.coords.latitude;
-    const longitude = coordinates.coords.longitude;
-    console.log(`Latitude: ${latitude}, Longitude: ${longitude} `);
-  }
-
-  async checkGpsStatus() {
-    try {
-     
-
-      await Geolocation.getCurrentPosition();
-      console.log('GPS is enabled');
-      this.getGeolocalizacao();
-    } catch (error) {
-      console.error('GPS is not enabled or there was an error', error);
-      // Display a toast message to the user
-      this.presentToast('Please enable GPS/Location services.');
-
-      const requestPermissionResult = await Geolocation.requestPermissions();
-      if (requestPermissionResult.location === 'granted') {
-        const position: GeolocationPosition = await Geolocation.getCurrentPosition();
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        console.log(`Latitude: ${ latitude }, Longitude: ${ longitude } `);
-      } else {
-        console.log('Location permission denied.');
-      }
-    }
-  }
-
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000, // Adjust as needed
-      position: 'bottom', // Adjust as needed
-    });
-    toast.present();
   }
 
 
@@ -126,7 +93,7 @@ export class VisitaPage extends PagePadrao implements OnInit {
   }
 
   async ngOnInit() {
-    this.checkStatusGps();
+
     this.dadosVisita = new Object();
     if (this.pedidoService.dadosVisita.id != undefined) {
       this.dadosVisita = this.pedidoService.dadosVisita;
@@ -136,7 +103,7 @@ export class VisitaPage extends PagePadrao implements OnInit {
     } else {
       this.acaoVisita = "I";
     }
-    
+
   }
 
   irListaVisita() {
@@ -147,40 +114,44 @@ export class VisitaPage extends PagePadrao implements OnInit {
     this.router.navigate(['/lista-pedido']);
   }
 
+
+
   async checkStatusGps() {
-    try {
-      await Geolocation.getCurrentPosition();
-      // GPS está ligado
-     alert("GPS está ligado")
-    } catch (error) {
-      if (error.code === 2) {
-        // Código 2 indica que o GPS está desativado
-        alert("GPS está desativado")
-      } else {
-        alert("Outro erro ocorreu, trate conforme necessário");
-        const permission = await Geolocation.checkPermissions();
-        if (permission.location === 'granted') {
-          // Permissão concedida, você pode acessar a localização
-          this.getGeolocalizacao();
-        } else {
-          // Permissão negada, lidar com isso aqui
-        }
-      }
-    }
-  }
 
+    
   
+    try {
+      const permissionStatus = await Geolocation.checkPermissions();
+      if (permissionStatus.location === "granted") {
+        // Acesso à localização permitido, prossiga com a operação.
+        await this.getGeolocalizacao();
+      } else {
+        // Permissão negada, trate adequadamente.
+        await this.handlePermissionDenied();
+      }
+    } catch (error) {
+      // Permissão negada, trate adequadamente.
+      //await this.handlePermissionDenied();
 
-  async getGeolocalizacao() {
 
-    const coordinates = await Geolocation.getCurrentPosition();
-    this.dadosVisita.latitude = coordinates.coords.latitude;
-    this.dadosVisita.longitude = coordinates.coords.longitude;
-    console.log('longitude:' + this.dadosVisita.longitude);
-    console.log('latitude: ' + this.dadosVisita.latitude);
+      this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.GPS);
+      this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.GPS)
+
+      this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.GPS).then(
+        result => console.log('Has permission?',result.hasPermission),
+        err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.GPS)
+      );
+      
+    
+
+    }
 
 
   }
+
+
+
+ 
 
   async Mensagem(msg: any) {
     const toast = await this.toastController.create({
@@ -277,26 +248,41 @@ export class VisitaPage extends PagePadrao implements OnInit {
     return true;
   }
 
+
+
+  async handlePermissionDenied() {
+    const alert = await this.alertController.create({
+      header: 'Permissão negada',
+      subHeader: 'Necessitamos desta permissão para usar o recurso de localização.',
+      message: 'Por favor, vá para as configurações do aplicativo e conceda a permissão.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
   async gravarVisita() {
+    await this.checkGPSPermission();
+   
 
-    this.getLocation();
-    this.checkGpsStatus();
-/*  if (this.acaoVisita == 'I') {
-      await this.getGeolocalizacao();
-    }
 
-   /* this.dadosVisita.filial = { id: this.pedidoService.objConfiguracao.filial.id }
-    this.dadosVisita.vendedor = { id: this.pedidoService.vendedorObj.id }
-    this.dadosVisita.obs = this.dadosVisita.obs.toUpperCase();
 
-    if (this.dadosVisita.dataProximaVisita != undefined) {
-      this.dadosVisita.dataProximaVisita = StringUtils.DateFormatadaInsert(this.dadosVisita.dataProximaVisita);
-
-    }
-
-    console.log(JSON.stringify(this.dadosVisita));
-
-    await this.gravaVisita();*/
+    /*  if (this.acaoVisita == 'I') {
+          await this.getGeolocalizacao();
+        }
+    
+       /* this.dadosVisita.filial = { id: this.pedidoService.objConfiguracao.filial.id }
+        this.dadosVisita.vendedor = { id: this.pedidoService.vendedorObj.id }
+        this.dadosVisita.obs = this.dadosVisita.obs.toUpperCase();
+    
+        if (this.dadosVisita.dataProximaVisita != undefined) {
+          this.dadosVisita.dataProximaVisita = StringUtils.DateFormatadaInsert(this.dadosVisita.dataProximaVisita);
+    
+        }
+    
+        console.log(JSON.stringify(this.dadosVisita));
+    
+        await this.gravaVisita();*/
 
   }
 
@@ -356,59 +342,81 @@ export class VisitaPage extends PagePadrao implements OnInit {
   }
 
 
+
   //Verifique se o aplicativo tem permissão de acesso GPS 
-  // async checkGPSPermission() {
-  //   await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-  //     async result => {
-  //       if (result.hasPermission) {
-  //         //Se tiver permissão, mostre a caixa de diálogo 'Ligar GPS'
-  //         await this.askToTurnOnGPS();
-  //       } else {
-  //         //Se não tiver permissão, peça permissão
-  //         await this.requestGPSPermission();
-  //       }
-  //     },
-  //     err => {
-  //       alert(err);
-  //     }
-  //   );
-  // }
+  async checkGPSPermission() {
+    await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+      async result => {
+        if (result.hasPermission) {
+          //Se tiver permissão, mostre a caixa de diálogo 'Ligar GPS'
+          await this.askToTurnOnGPS();
+        } else {
+          //Se não tiver permissão, peça permissão
+          await this.requestGPSPermission();
+        }
+      },
+      err => {
+        alert(err);
+        this.pedidoService.dadosPedido.longitude = "";
+        this.pedidoService.dadosPedido.latitude = "";
+      }
+    );
+  }
 
-  // async requestGPSPermission() {
-  //   await this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-  //     if (canRequest) {
-  //       console.log("4");
-  //     } else {
-  //       //Show 'GPS Permission Request' dialogue
-  //       this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
-  //         .then(
-  //           async () => {
-  //             // call method to turn on GPS
-  //             await this.askToTurnOnGPS();
-  //           },
-  //           error => {
-  //             //Show alert if user click on 'No Thanks'
-  //             alert('requestPermission Error requesting location permissions ' + error);
-  //             return;
-  //           }
-  //         );
-  //     }
-  //   });
-  // }
+  async requestGPSPermission() {
+    await this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+      if (canRequest) {
+        // console.log("4");
+      } else {
+        //Show 'GPS Permission Request' dialogue
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+          .then(
+            async () => {
+              // call method to turn on GPS
+              await this.askToTurnOnGPS();
+            },
+            error => {
+              //Show alert if user click on 'No Thanks'
+              alert('requestPermission Error requesting location permissions ' + error);
+              return;
+            }
+          );
+      }
+    });
+  }
 
-  // async askToTurnOnGPS() {
-  //   await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-  //     async () => {
-  //       // When GPS Turned ON call method to get Accurate location coordinates
-  //       await this.getGeolocalizacao();
-  //     },
-  //     error => {
-  //       alert('Error requesting location permissions ' + JSON.stringify(error));
-  //       return;
-  //     }
-  //   );
-  // }
+  async askToTurnOnGPS() {
+    await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+      async () => {
+        // When GPS Turned ON call method to get Accurate location coordinates
+        await this.getGeolocalizacao();
+      },
+      error => {
+        alert('Error requesting location permissions ' + JSON.stringify(error));
+        return;
+      }
+    );
+  }
 
+
+  async getGeolocalizacao() {
+
+    
+    await Geolocation.getCurrentPosition().then((resp) => {
+      console.log(resp.coords.latitude);
+      console.log(resp.coords.longitude);
+      // resp.coords.latitude
+      // resp.coords.longitude
+      this.pedidoService.dadosPedido.longitude = resp.coords.longitude;
+      this.pedidoService.dadosPedido.latitude = resp.coords.latitude;
+      console.log("log" + this.pedidoService.dadosPedido.longitude);
+      console.log("lat" + this.pedidoService.dadosPedido.latitude);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+
+ 
 
 
 }

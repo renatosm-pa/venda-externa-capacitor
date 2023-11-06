@@ -12,8 +12,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ButtonModule} from 'primeng/button';
 import {  IonicRouteStrategy, IonIcon, IonicModule } from '@ionic/angular';
 
-
-
+import { Component, NgZone } from '@angular/core';
+import { CallbackID, Capacitor } from '@capacitor/core';
+import { Geolocation } from '@capacitor/geolocation';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 
 
@@ -29,7 +32,8 @@ registerLocaleData(localePt);
      // BrMaskerModule,  
       //FiltroComponentPageModule, 
       ButtonModule, 
-      CommonModule
+      CommonModule,
+      
     ],   
     
    
@@ -37,6 +41,8 @@ registerLocaleData(localePt);
       {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},         
        DatePipe,
        DecimalPipe,
+       AndroidPermissions,
+       LocationAccuracy,
        //ConfirmationService,
        NgxSpinnerService,
       {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
