@@ -17,7 +17,7 @@ import { CallbackID, Capacitor } from '@capacitor/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
-
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 
 
 registerLocaleData(localePt);
@@ -43,6 +43,7 @@ registerLocaleData(localePt);
        DecimalPipe,
        AndroidPermissions,
        LocationAccuracy,
+       
        //ConfirmationService,
        NgxSpinnerService,
       {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

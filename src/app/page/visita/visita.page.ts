@@ -118,8 +118,8 @@ export class VisitaPage extends PagePadrao implements OnInit {
 
   async checkStatusGps() {
 
-    
-  
+
+
     try {
       const permissionStatus = await Geolocation.checkPermissions();
       if (permissionStatus.location === "granted") {
@@ -138,11 +138,11 @@ export class VisitaPage extends PagePadrao implements OnInit {
       this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.GPS)
 
       this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.GPS).then(
-        result => console.log('Has permission?',result.hasPermission),
+        result => console.log('Has permission?', result.hasPermission),
         err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.GPS)
       );
-      
-    
+
+
 
     }
 
@@ -151,7 +151,7 @@ export class VisitaPage extends PagePadrao implements OnInit {
 
 
 
- 
+
 
   async Mensagem(msg: any) {
     const toast = await this.toastController.create({
@@ -262,27 +262,27 @@ export class VisitaPage extends PagePadrao implements OnInit {
   }
 
   async gravarVisita() {
-    await this.checkGPSPermission();
-   
+    if (!this.validar()) {
+      this.loaderService.hideLoader();
+      return;
+    }
+    
+    if (this.acaoVisita == 'I') {
+      await this.checkGPSPermission();
+    }
 
+    this.dadosVisita.filial = { id: this.pedidoService.objConfiguracao.filial.id }
+    this.dadosVisita.vendedor = { id: this.pedidoService.vendedorObj.id }
+    this.dadosVisita.obs = this.dadosVisita.obs.toUpperCase();
 
+    if (this.dadosVisita.dataProximaVisita != undefined) {
+      this.dadosVisita.dataProximaVisita = StringUtils.DateFormatadaInsert(this.dadosVisita.dataProximaVisita);
 
-    /*  if (this.acaoVisita == 'I') {
-          await this.getGeolocalizacao();
-        }
-    
-       /* this.dadosVisita.filial = { id: this.pedidoService.objConfiguracao.filial.id }
-        this.dadosVisita.vendedor = { id: this.pedidoService.vendedorObj.id }
-        this.dadosVisita.obs = this.dadosVisita.obs.toUpperCase();
-    
-        if (this.dadosVisita.dataProximaVisita != undefined) {
-          this.dadosVisita.dataProximaVisita = StringUtils.DateFormatadaInsert(this.dadosVisita.dataProximaVisita);
-    
-        }
-    
-        console.log(JSON.stringify(this.dadosVisita));
-    
-        await this.gravaVisita();*/
+    }
+
+    console.log(JSON.stringify(this.dadosVisita));
+
+    await this.gravaVisita();
 
   }
 
@@ -357,8 +357,8 @@ export class VisitaPage extends PagePadrao implements OnInit {
       },
       err => {
         alert(err);
-        this.pedidoService.dadosPedido.longitude = "";
-        this.pedidoService.dadosPedido.latitude = "";
+        this.dadosVisita.longitude = "";
+        this.dadosVisita.latitude = "";
       }
     );
   }
@@ -401,22 +401,22 @@ export class VisitaPage extends PagePadrao implements OnInit {
 
   async getGeolocalizacao() {
 
-    
+
     await Geolocation.getCurrentPosition().then((resp) => {
       console.log(resp.coords.latitude);
       console.log(resp.coords.longitude);
       // resp.coords.latitude
       // resp.coords.longitude
-      this.pedidoService.dadosPedido.longitude = resp.coords.longitude;
-      this.pedidoService.dadosPedido.latitude = resp.coords.latitude;
-      console.log("log" + this.pedidoService.dadosPedido.longitude);
-      console.log("lat" + this.pedidoService.dadosPedido.latitude);
+      this.dadosVisita.longitude = resp.coords.longitude;
+      this.dadosVisita.latitude = resp.coords.latitude;
+      console.log("log" + this.dadosVisita.longitude);
+      console.log("lat" + this.dadosVisita.latitude);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
   }
 
- 
+
 
 
 }

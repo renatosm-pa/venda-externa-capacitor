@@ -1,0 +1,201 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Busca Preço
+    </ion-title>
+    <ion-buttons slot="end" secondary="right">
+      <ion-icon style="font-size: 25px;" name="qr-code-outline" (click)="goToBarcodeScan()"></ion-icon>   
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label *ngIf="automatico">Automático</ion-label>
+    <ion-label *ngIf="!automatico">Manual</ion-label>
+    <ion-toggle slot="end" [(ngModel)]="automatico"></ion-toggle>
+  </ion-item>
+
+  <div class="new-card">
+    <ion-button class="new-btn" margin (click)="goToBarcodeScan()">
+      <img width="100" src="../../../assets/imagens/barcode.png" />
+      <!-- <p>ler código de barras</p> -->
+    </ion-button>
+
+    <ion-item *ngIf="!automatico">
+      <ion-input (keyup.enter)="goToBarcodeScanManual()" [(ngModel)]="this.scannedData" maxlength="150" style="font-size: 50px; text-align: center">
+      </ion-input>
+    </ion-item>
+
+    <div *ngIf="!automatico">
+      <ion-button expand="block" (click)="goToBarcodeScanManual()">
+        <ion-icon slot="start" name="save-sharp" ></ion-icon> Pesquisar
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- novo================== -->
+
+  <div class="box-card" *ngFor="let produto of this.listaProduto; index as i; let even = even">
+
+    <ion-item lines="none" style="border-bottom: 1px solid #fddeb6;">
+      <ion-icon name="cube" slot="start"></ion-icon>
+      <h4>{{produto.id.produto.nomeProduto}}</h4>
+    </ion-item>
+
+    <div class="conteudo">
+
+      <ion-item lines="none">
+        <p>Codigo: <span>{{ produto.id.produto.id}}</span></p>
+      </ion-item>
+
+      <ion-grid>
+
+        <ion-row>
+          <ion-col size="4">
+            <ion-item lines="none">
+              <ion-label position="stacked">UN</ion-label>
+              <ion-input>{{produto.id.produto?.unidade}}</ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item lines="none">
+              <ion-label position="stacked">Qtd Emb</ion-label>
+              <ion-input>{{produto.id.produto?.quantidadeEmbalagem}}</ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item lines="none">
+              <ion-label position="stacked">UN Emb</ion-label>
+              <ion-input>{{produto.id.produto?.unidadeEmbalagem}}</ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+
+            <ion-item lines="none">
+              <ion-label position="stacked">Fabricante</ion-label>
+              <ion-input>{{ produto.id.produto.fabricante?.nome}}</ion-input>
+            </ion-item>
+
+          </ion-col>
+          <ion-col size="6">
+
+            <ion-item lines="none">
+              <ion-label position="stacked">Grupo</ion-label>
+              <ion-input>{{produto.id.produto.grupo?.nome}}</ion-input>
+            </ion-item>
+
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+
+            <ion-item lines="none">
+              <ion-label position="stacked">Varejo</ion-label>
+              <ion-input>{{ numberToReal(produto?.precoVarejo) }}</ion-input>
+            </ion-item>
+
+          </ion-col>
+          <ion-col size="6">
+
+            <ion-item lines="none">
+              <ion-label position="stacked">Atacado</ion-label>
+              <ion-input>{{ numberToReal(produto?.precoAtacado) }}</ion-input>
+            </ion-item>
+
+          </ion-col>
+        </ion-row>
+        <ion-row>
+
+          <ion-col size="6">
+
+            <ion-item lines="none">
+              <ion-label position="stacked">Qtd. </ion-label>
+              <ion-input>{{produto?.quantidade}}</ion-input>
+            </ion-item>
+
+          </ion-col>
+          <ion-col size="6">
+
+            <ion-item lines="none">
+              <ion-label position="stacked">Ean</ion-label>
+              <ion-input>{{produto.id.produto?.ean}}</ion-input>
+            </ion-item>
+
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+
+    </div>
+  </div>
+  <!-- //novo================== -->
+
+  <!-- <ion-item lines="none" *ngFor="let produto of this.listaProduto; index as i; let even = even" class="my-item">
+
+    <ion-grid>
+      <p><span>Código:</span> {{ produto.id.produto.id}}</p>
+      <p class="nome-produto">{{produto.id.produto.nomeProduto}}</p>
+      <ion-row>
+        <ion-col size="4">
+          <p><span>UN :</span> {{produto?.unidade}}</p>
+        </ion-col>
+
+        <ion-col size="4">
+          <p><span>Qtd. Emb.:</span> {{produto.id.produto?.quantidadeEmbalagem}}</p>
+        </ion-col>
+
+        <ion-col size="4">
+          <p><span>UN Emb:</span> {{produto.id.produto?.unidadeEmbalagem}}</p>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <p><span>Fabricante:</span> {{ produto.id.produto.fabricante?.nome}}</p>
+
+      </ion-row>
+      <ion-row>
+        <p><span>Grupo:</span> {{produto.id.produto.grupo?.nome}}</p>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col size="6">
+          <p><span>Varejo:</span>
+            {{ numberToReal(produto?.precoVarejo) }}
+          </p>
+        </ion-col>
+
+        <ion-col size="6">
+          <p><span>Atacado:</span>
+            {{ numberToReal(produto?.precoAtacado) }}
+          </p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <p><span>Qtd. :</span> {{produto?.quantidade}}</p>
+        </ion-col>
+
+        <ion-col size="6">
+          <p><span>Ean:</span> {{produto.id.produto?.ean}}</p>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+  </ion-item> -->
+
+</ion-content>

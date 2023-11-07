@@ -39,7 +39,10 @@ const routes: Routes = [
     path: 'lista-pedido',
     loadChildren: () => import('./page/lista-pedido/lista-pedido.module').then(m => m.PedidoListPageModule)
   },
-
+  {
+    path: 'busca-preco',
+    loadChildren: () => import('./page/busca-preco/busca-preco.module').then(m => m.BuscaPrecoPageModule)
+  },
   // {
   //   path: 'cliente',
   //   loadChildren: () => import('./page/lista-cliente/lista-cliente.module').then(m => m.ClienteListPageModule)
@@ -83,10 +86,7 @@ const routes: Routes = [
   //   path: 'catalogo-produto',
   //   loadChildren: () => import('./page/catalogo-produto/catalogo-produto.module').then(m => m.CatalogoProdutoListPageModule)
   // },
-  // {
-  //   path: 'busca-preco',
-  //   loadChildren: () => import('./page/busca-preco/busca-preco.module').then(m => m.BuscaPrecoPageModule)
-  // },
+
   // {
   //   path: 'inventario',
   //   loadChildren: () => import('./page/inventario/inventario.module').then(m => m.InventarioPageModule)
